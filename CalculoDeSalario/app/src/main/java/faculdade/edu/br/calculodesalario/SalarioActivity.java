@@ -10,9 +10,9 @@ import android.widget.RadioGroup;
 
 public class SalarioActivity extends AppCompatActivity {
 
-   RadioGroup radioGroupo;
-   Button btnCalcular;
-   EditText txtSalario;
+   private RadioGroup radioGroup;
+   private Button btnCalcular;
+   private EditText txtSalario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,17 +20,17 @@ public class SalarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_salario);
 
         txtSalario = findViewById(R.id.editSalario);
-        radioGroupo = findViewById(R.id.radioGrupo);
+        radioGroup = findViewById(R.id.radioGrupo);
         btnCalcular = findViewById(R.id.btnCalcular);
 
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 double salario = Double.parseDouble(txtSalario.getText().toString());
-                int opcao = radioGroupo.getCheckedRadioButtonId();
+                int opcao = radioGroup.getCheckedRadioButtonId();
                 if(opcao == R.id.radio40) salario *= 1.40;
                 if(opcao == R.id.radio45) salario *= 1.45;
-                if(opcao == R.id.radio50) salario *= 1.45;
+                if(opcao == R.id.radio50) salario *= 1.50;
                 AlertDialog.Builder cxDialogo = new AlertDialog.Builder(SalarioActivity.this);
 
                 cxDialogo.setTitle("Resultado");
