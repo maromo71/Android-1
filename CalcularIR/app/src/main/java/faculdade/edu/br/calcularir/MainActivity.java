@@ -47,8 +47,11 @@ public class MainActivity extends AppCompatActivity {
             salarioLiquido = salario - valorImposto;
 
             mensagem.append("Salario bruto: " + Double.toString(salario));
+            mensagem.append("\n");
             mensagem.append("Valor do imposto: " + Double.toString(valorImposto));
+            mensagem.append("\n");
             mensagem.append("Salario Liquido: " + Double.toString(salarioLiquido));
+            mensagem.append("\n");
             return mensagem.toString();
         }
 
@@ -57,8 +60,11 @@ public class MainActivity extends AppCompatActivity {
             salarioLiquido = salario - valorImposto;
 
             mensagem.append("Salario bruto: " + Double.toString(salario));
+            mensagem.append("\n");
             mensagem.append("Valor do imposto: " + Double.toString(valorImposto));
+            mensagem.append("\n");
             mensagem.append("Salario Liquido: " + Double.toString(salarioLiquido));
+            mensagem.append("\n");
             return mensagem.toString();
         }
 
