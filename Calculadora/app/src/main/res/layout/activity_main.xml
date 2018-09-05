@@ -18,7 +18,9 @@
     <EditText
         android:id="@+id/txtValor1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"/>
+
     <TextView
         android:text="Valor 2:"
         android:layout_width="match_parent"
@@ -26,7 +28,8 @@
     <EditText
         android:id="@+id/txtValor2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"/>
     <Button
         android:id="@+id/Somar"
         android:text="+"
