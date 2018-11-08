@@ -1,16 +1,25 @@
 package faculdade.edu.br.agenda;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.List;
+
+import faculdade.edu.br.agenda.dao.ClienteDAO;
+import faculdade.edu.br.agenda.model.Cliente;
 
 public class FormularioClienteActivity extends AppCompatActivity {
 
+    private FormularioClienteHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +38,11 @@ public class FormularioClienteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_formulario_ok:
-                Toast.makeText(FormularioClienteActivity.this,"Botão clicado!", Toast.LENGTH_SHORT).show();
+                Cliente cliente = helper.pegarCliente();
+                ClienteDAO dao = new ClienteDAO(this);
+                dao.inserir(cliente);
+                dao.close();
+                Toast.makeText(FormularioClienteActivity.this,"Cliente " + cliente.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }

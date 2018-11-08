@@ -6,7 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import java.util.List;
+
+import faculdade.edu.br.agenda.dao.ClienteDAO;
+import faculdade.edu.br.agenda.model.Cliente;
 
 public class ListaClientesActivity extends AppCompatActivity {
 
@@ -14,11 +20,12 @@ public class ListaClientesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_clientes);
-
-        String clientes[] = {"Antonio Carlos", "Marcos Antonio","Oscar Rodrigues","Pablo Selton"};
+        ClienteDAO dao = new ClienteDAO(this);
+        List<Cliente> clientes = dao.buscarClientes();
         ListView listaClientes = findViewById(R.id.listaClientes);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,clientes);
+        ArrayAdapter<Cliente> adapter = new ArrayAdapter<Cliente>(this,android.R.layout.simple_list_item_1,clientes);
         listaClientes.setAdapter(adapter);
+        carregarListaClientes();
         Button btnNovo = findViewById(R.id.listacliente_btnNovo);
         btnNovo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,4 +35,19 @@ public class ListaClientesActivity extends AppCompatActivity {
             }
         });
     }
+    private void carregarListaClientes() {
+        ClienteDAO dao = new ClienteDAO(this);
+        List<Cliente> clientes = dao.buscarClientes();
+        dao.close();
+
+        ListView listaClientes = findViewById(R.id.listaClientes);
+        ArrayAdapter<Cliente> adapter = new ArrayAdapter<Cliente>(this,android.R.layout.simple_list_item_1,clientes);
+        listaClientes.setAdapter(adapter);
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        carregarListaClientes();
+    }
+
 }
