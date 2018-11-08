@@ -14,9 +14,10 @@ public class FormularioClienteHelper {
     private EditText campoFone;
     private EditText campoEmail;
     private RatingBar campoRating;
+    private Cliente cliente;
 
     public FormularioClienteHelper (FormularioClienteActivity activity){
-
+        this.cliente = new Cliente();
         campoNome = activity.findViewById(R.id.txtNome);
         campoEndereco = activity.findViewById(R.id.txtEndereco);
         campoBairro = activity.findViewById(R.id.txtBairro);
@@ -43,4 +44,16 @@ public class FormularioClienteHelper {
 
     }
 
+    public void preencherFormulario(Cliente cli) {
+        this.cliente = cli;
+        campoNome.setText(cli.getNome());
+        campoEndereco.setText(cli.getEndereco());
+        campoBairro.setText(cli.getEndereco());
+        campoCidade.setText(cli.getCidade());
+        campoEstado.setText(cli.getEstado());
+        campoFone.setText(cli.getFone());
+        campoEmail.setText(cli.getEmail());
+        campoRating.setProgress(cli.getNota().intValue());
+
+    }
 }

@@ -74,4 +74,25 @@ public class ClienteDAO extends SQLiteOpenHelper {
         c.close();
         return clientes;
     }
+
+    public void excluir(Cliente cli) {
+        SQLiteDatabase db = getWritableDatabase();
+        String [] params = {cli.getId().toString()};
+        db.delete("Clientes","id = ?",params);
+    }
+
+    public void alterar(Cliente cliente) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues dados = new ContentValues();
+        dados.put("nome",cliente.getNome());
+        dados.put("endereco",cliente.getEndereco());
+        dados.put("bairro",cliente.getBairro());
+        dados.put("cidade",cliente.getCidade());
+        dados.put("estado",cliente.getEstado());
+        dados.put("fone",cliente.getFone());
+        dados.put("email",cliente.getEmail());
+        dados.put("nota", cliente.getNota());
+        String [] params = {cliente.getId().toString()};
+        db.update("Clientes",dados,"id = ?",params);
+    }
 }

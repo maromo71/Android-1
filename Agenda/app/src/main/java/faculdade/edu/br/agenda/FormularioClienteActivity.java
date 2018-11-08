@@ -24,6 +24,13 @@ public class FormularioClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_cliente);
+        helper = new FormularioClienteHelper(this);
+        Intent intent = getIntent();
+        Cliente cli = (Cliente) intent.getSerializableExtra("Cliente");
+        if(cli != null){
+            helper.preencherFormulario(cli);
+        }
+
     }
 
     @Override
@@ -40,7 +47,11 @@ public class FormularioClienteActivity extends AppCompatActivity {
             case R.id.menu_formulario_ok:
                 Cliente cliente = helper.pegarCliente();
                 ClienteDAO dao = new ClienteDAO(this);
-                dao.inserir(cliente);
+                if(cliente.getId() !=null){
+                    dao.alterar(cliente);
+                }else{
+                    dao.inserir(cliente);
+                }
                 dao.close();
                 Toast.makeText(FormularioClienteActivity.this,"Cliente " + cliente.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
                 finish();
